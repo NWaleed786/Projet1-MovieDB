@@ -1,0 +1,67 @@
+<?php
+require_once('fonctions.php');
+$serieId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$serie = $serieId > 0 ? serieDetails($serieId) : [];
+$cast = $serieId > 0 ? array_slice(serieCredits($serieId), 0, 8) : [];
+$trailer = $serieId > 0 ? getYoutubeTrailer('tv', $serieId) : null;
+require('header.php');
+?>
+<div class="container">
+    <?php if (empty($serie)): ?>
+        <div class="alert alert-danger">Série introuvable.</div>
+    <?php else: ?>
+        <div class="row align-items-start g-4 mb-5">
+            <div class="col-md-4 text-center">
+                <img class="detail-poster" src="<?= htmlspecialchars(posterUrl($serie['poster_path'] ?? null, 'w500')); ?>" alt="Affiche de la série">
+                <?php if ($trailer): ?>
+                    <a href="<?= htmlspecialchars($trailer['url']); ?>" target="_blank" rel="noopener" class="btn btn-danger mt-3 w-100 mx-auto" style="max-width:320px;">
+                        <i class="bi bi-youtube"></i> Voir la bande-annonce
+                    </a>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-8">
+                <div class="info-box">
+                    <h1 class="mb-3 text-center"><?= htmlspecialchars($serie['name'] ?? 'Titre inconnu'); ?></h1>
+                    <h6 class="bg-primary text-white text-center py-2 mb-3">Résumé</h6>
+                    <p class="text-center"><?= htmlspecialchars($serie['overview'] ?? 'Aucun résumé disponible.'); ?></p>
+                    <p class="text-center mb-1"><strong>Première diffusion :</strong> <?= htmlspecialchars(formatDateFr($serie['first_air_date'] ?? null)); ?></p>
+                    <p class="text-center mb-1"><strong>Note :</strong> <?= htmlspecialchars((string) ($serie['vote_average'] ?? '0')); ?>/10</p>
+                    <p class="text-center mb-1"><strong>Saisons :</strong> <?= htmlspecialchars((string) ($serie['number_of_seasons'] ?? '?')); ?> — <strong>Épisodes :</strong> <?= htmlspecialchars((string) ($serie['number_of_episodes'] ?? '?')); ?></p>
+                    <p class="text-center mb-0"><strong>Genres :</strong>
+                        <?php
+                        $genreNames = [];
+                        foreach (($serie['genres'] ?? []) as $genre) {
+                            $genreNames[] = $genre['name'];
+                        }
+                        echo htmlspecialchars(implode(', ', $genreNames));
+                        ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <?php if ($trailer): ?>
+            <h2 class="section-title">Bande-annonce</h2>
+            <div class="ratio ratio-16x9 mb-5" style="max-width: 720px;">
+                <iframe src="https://www.youtube.com/embed/<?= htmlspecialchars($trailer['key']); ?>" title="<?= htmlspecialchars($trailer['name']); ?>" allowfullscreen></iframe>
+            </div>
+        <?php endif; ?>
+
+        <h2 class="section-title">Principaux acteurs</h2>
+        <div class="row g-4">
+            <?php foreach ($cast as $acteur): ?>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card actor-card shadow-sm">
+                        <img src="<?= htmlspecialchars(profileUrl($acteur['profile_path'] ?? null)); ?>" alt="Photo de l'acteur">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?= htmlspecialchars($acteur['name'] ?? 'Nom inconnu'); ?></h5>
+                            <p class="small text-muted">Rôle : <?= htmlspecialchars($acteur['character'] ?? 'Non précisé'); ?></p>
+                            <a href="acteur.php?id=<?= (int) ($acteur['id'] ?? 0); ?>" class="btn btn-primary mt-auto">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+<?php require('footer.php'); ?>
