@@ -9,42 +9,69 @@ Application PHP qui utilise l'API TMDB pour afficher des films, des séries et d
 - Une connexion Internet
 - Une clé API TMDB dans `fonctions.php`
 
-## Installation
+## Installation sous Windows
 
-1. Installer PHP. Sous Windows, XAMPP convient très bien. Sous Linux, installer PHP avec cURL depuis le gestionnaire de paquets de la distribution.
-2. Placer le dossier du projet dans un emplacement de travail.
-3. Ouvrir un terminal dans le dossier du projet.
-4. Vérifier que PHP est disponible :
+### Prérequis
 
-   ```text
-   php -v
-   ```
+1. Installer [XAMPP](https://www.apachefriends.org/).
+2. Vérifier que PHP est disponible dans le dossier XAMPP :
 
-   Avec XAMPP sous Windows, utiliser si nécessaire :
-
-   ```text
+   ```powershell
    C:\xampp\php\php.exe -v
    ```
 
-5. Vérifier que la constante `TMDB_API_KEY` dans `fonctions.php` contient une clé API TMDB valide.
+3. Vérifier que l'extension cURL est activée dans `C:\xampp\php\php.ini` :
 
-## Démarrer le serveur local
+   ```ini
+   extension=curl
+   ```
 
-Depuis le dossier du projet, lancer :
+   Si la ligne commence par `;`, supprimer le `;`, puis redémarrer le terminal.
 
-```text
-php -S localhost:8000 -t .
+### Installation et démarrage
+
+1. Placer le dossier du projet dans un emplacement de travail, par exemple `C:\projets\Projet-MovieDB`.
+2. Ouvrir PowerShell dans ce dossier.
+3. Vérifier que `TMDB_API_KEY` dans `fonctions.php` contient une clé API TMDB valide.
+4. Démarrer le serveur :
+
+   ```powershell
+   C:\xampp\php\php.exe -S localhost:8000 -t .
+   ```
+
+5. Ouvrir [http://localhost:8000/](http://localhost:8000/) dans le navigateur.
+
+## Installation sous Linux
+
+### Prérequis
+
+Installer PHP et cURL avec le gestionnaire de paquets de la distribution.
+
+Pour Debian ou Ubuntu :
+
+```bash
+sudo apt update
+sudo apt install php php-curl
 ```
 
-Avec XAMPP sous Windows, lancer :
+Vérifier l'installation :
 
-```text
-C:\xampp\php\php.exe -S localhost:8000 -t .
+```bash
+php -v
 ```
 
-Puis ouvrir cette adresse dans un navigateur :
+### Installation et démarrage
 
-http://localhost:8000/
+1. Placer le dossier du projet dans un emplacement de travail.
+2. Ouvrir un terminal dans ce dossier.
+3. Vérifier que `TMDB_API_KEY` dans `fonctions.php` contient une clé API TMDB valide.
+4. Démarrer le serveur :
+
+   ```bash
+   php -S localhost:8000 -t .
+   ```
+
+5. Ouvrir [http://localhost:8000/](http://localhost:8000/) dans le navigateur.
 
 La page d'accueil redirige automatiquement vers les films populaires.
 
