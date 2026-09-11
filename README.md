@@ -1,104 +1,66 @@
 # Projet Movie DB
 
-Application PHP permettant de consulter les films, séries et acteurs depuis l'API [TMDB](https://www.themoviedb.org/).
-
-## Fonctionnalités
-
-- Films populaires, mieux notés, récemment sortis et à venir
-- Films à venir filtrés sur les sorties françaises et actualisés avec l'API TMDB
-- Recherche de films, séries et acteurs
-- Fiches détaillées des films, séries et acteurs
-- Filtrage par genre, région et période de sortie
-- Catalogue de K-Dramas
+Application PHP qui utilise l'API TMDB pour afficher des films, des séries et des acteurs.
 
 ## Prérequis
 
-- PHP 8.0 ou supérieur
-- Extension PHP cURL recommandée
-- Une clé API TMDB configurée dans `fonctions.php`
-- Une connexion Internet pour interroger TMDB et charger les affiches
+- PHP 8 ou une version plus récente
+- L'extension PHP cURL
+- Une connexion Internet
+- Une clé API TMDB dans `fonctions.php`
 
-## Installation sous Windows
+## Installation
 
-### Avec XAMPP
-
-1. Installer [XAMPP](https://www.apachefriends.org/).
-2. Copier le projet dans un dossier de travail, par exemple :
+1. Installer PHP. Sous Windows, XAMPP convient très bien. Sous Linux, installer PHP avec cURL depuis le gestionnaire de paquets de la distribution.
+2. Placer le dossier du projet dans un emplacement de travail.
+3. Ouvrir un terminal dans le dossier du projet.
+4. Vérifier que PHP est disponible :
 
    ```text
-   C:\xampp\htdocs\Projet-MovieDB
+   php -v
    ```
 
-3. Ouvrir PowerShell dans le dossier du projet.
-4. Vérifier PHP :
+   Avec XAMPP sous Windows, utiliser si nécessaire :
 
-   ```powershell
+   ```text
    C:\xampp\php\php.exe -v
    ```
 
-5. Démarrer le serveur PHP local :
+5. Vérifier que la constante `TMDB_API_KEY` dans `fonctions.php` contient une clé API TMDB valide.
 
-   ```powershell
-   C:\xampp\php\php.exe -S localhost:8000 -t .
-   ```
+## Démarrer le serveur local
 
-6. Ouvrir [http://localhost:8000/](http://localhost:8000/) dans le navigateur.
+Depuis le dossier du projet, lancer :
 
-### Avec PHP dans le PATH
-
-Si PHP est ajouté au `PATH` Windows, lancer simplement :
-
-```powershell
+```text
 php -S localhost:8000 -t .
 ```
 
-## Installation sous Linux
+Avec XAMPP sous Windows, lancer :
 
-### Debian, Ubuntu et distributions compatibles
+```text
+C:\xampp\php\php.exe -S localhost:8000 -t .
+```
 
-1. Installer PHP et cURL :
+Puis ouvrir cette adresse dans un navigateur :
 
-   ```bash
-   sudo apt update
-   sudo apt install php php-curl
-   ```
+http://localhost:8000/
 
-2. Cloner le dépôt et entrer dans le dossier :
+La page d'accueil redirige automatiquement vers les films populaires.
 
-   ```bash
-   git clone https://github.com/NWaleed786/Projet-MovieDB.git
-   cd Projet-MovieDB
-   ```
+## Principales pages
 
-3. Démarrer le serveur PHP local :
-
-   ```bash
-   php -S localhost:8000 -t .
-   ```
-
-4. Ouvrir [http://localhost:8000/](http://localhost:8000/) dans le navigateur.
-
-## Configuration de la clé TMDB
-
-La clé API est utilisée dans `fonctions.php` par la constante `TMDB_API_KEY`.
-Pour un déploiement public, il est recommandé de stocker cette clé dans une variable d'environnement plutôt que de la publier dans le dépôt.
-
-## Pages principales
-
-| Page | Utilisation |
-| --- | --- |
-| `popular.php` | Films populaires |
-| `topRated.php` | Films les mieux notés |
-| `latest.php` | Films récemment sortis |
-| `upcoming.php` | Prochaines sorties |
-| `date-search.php` | Recherche par période |
-| `genreMovies.php?id=28` | Films par genre |
-| `region.php?code=US` | Films par région |
-| `kdramas.php` | Séries coréennes |
-| `search-movies.php?query=gladiator` | Recherche de films |
-| `search-series.php?query=squid+game` | Recherche de séries |
-| `search-acteurs.php?query=tom` | Recherche d'acteurs |
+- `popular.php` : films populaires
+- `topRated.php` : films les mieux notés
+- `latest.php` : films récemment sortis
+- `upcoming.php` : films à venir
+- `genreMovies.php` : films par genre
+- `region.php` : films par région
+- `kdramas.php` : séries coréennes
+- `search-movies.php` : recherche de films
+- `search-series.php` : recherche de séries
+- `search-acteurs.php` : recherche d'acteurs
 
 ## Arrêter le serveur
 
-Dans le terminal qui exécute PHP, utiliser `Ctrl+C`.
+Dans le terminal où le serveur fonctionne, appuyer sur `Ctrl+C`.
