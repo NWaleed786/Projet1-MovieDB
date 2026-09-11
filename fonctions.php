@@ -148,7 +148,7 @@ function regionsList(): array
     return [
         'US' => 'Hollywood (États-Unis)',
         'IN' => 'Bollywood (Inde)',
-        'KR' => 'Corée du Sud',
+        'KR' => 'Corée du Sud (K-Dramas)',
         'JP' => 'Japon (Anime / J-Movies)',
         'FR' => 'France',
         'GB' => 'Royaume-Uni',
@@ -173,16 +173,16 @@ function moviesByRegion(string $countryCode): array
     return $result['results'] ?? [];
 }
 
-function koreanDramas(): array
+function seriesByRegion(string $countryCode): array
 {
-    // Les "K-Dramas" sont des séries TV, pas des films : on utilise /discover/tv
     $result = callTmdb('/discover/tv', [
-        'with_origin_country' => 'KR',
+        'with_origin_country' => strtoupper($countryCode),
         'sort_by' => 'popularity.desc',
     ]);
 
     return $result['results'] ?? [];
 }
+
 
 function searchSeries(string $query): array
 {

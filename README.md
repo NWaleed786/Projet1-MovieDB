@@ -82,8 +82,7 @@ La page d'accueil redirige automatiquement vers les films populaires.
 - `latest.php` : films récemment sortis
 - `upcoming.php` : films à venir
 - `genreMovies.php` : films par genre
-- `region.php` : films par région
-- `kdramas.php` : séries coréennes
+- `region.php` : films par région et séries coréennes avec `?code=KR`
 - `search-movies.php` : recherche de films
 - `search-series.php` : recherche de séries
 - `search-acteurs.php` : recherche d'acteurs

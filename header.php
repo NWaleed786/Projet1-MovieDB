@@ -88,8 +88,6 @@
                         <?php foreach (regionsList() as $regionCode => $regionName): ?>
                             <li><a class="dropdown-item" href="region.php?code=<?= htmlspecialchars($regionCode); ?>"><?= htmlspecialchars($regionName); ?></a></li>
                         <?php endforeach; ?>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="kdramas.php">K-Dramas (séries)</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="date-search.php">Recherche par date</a></li>
